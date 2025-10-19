@@ -79,7 +79,7 @@ Feature Engineering:
 
 ---
 
-## Example in Python
+## Python
 
 ```python
 import pandas as pd
@@ -94,21 +94,20 @@ data = {
 }
 df = pd.DataFrame(data)
 
-# --- Feature Creation ---
+# Feature Creation
 df["Date"] = pd.to_datetime(df["Date"])
 df["Day"] = df["Date"].dt.day
 df["Month"] = df["Date"].dt.month
 
-# --- Feature Transformation ---
+#Feature Transformation
 encoder = OneHotEncoder(sparse_output=False)
 city_encoded = encoder.fit_transform(df[["City"]])
 encoded_df = pd.DataFrame(city_encoded, columns=encoder.get_feature_names_out(["City"]))
 df = pd.concat([df, encoded_df], axis=1)
 
-# --- Feature Scaling ---
+#Feature Scaling
 scaler = StandardScaler()
 df[["Age", "Salary"]] = scaler.fit_transform(df[["Age", "Salary"]])
 
-# --- Final Result ---
+# Final Result 
 print(df)
-# Feature-Engineering
